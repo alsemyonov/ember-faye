@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
+const { $ } = Ember;
+
 export const CsrfProtection = {
   outgoing(message, callback) {
     message.ext = message.ext || {};
-    message.ext.csrfToken = Ember.$('meta[name=csrf-token]').attr('content');
+    message.ext.csrfToken = $('meta[name=csrf-token]').attr('content');
     callback(message);
   }
 };

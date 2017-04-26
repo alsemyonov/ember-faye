@@ -1,16 +1,16 @@
 import Ember from 'ember';
-const { getOwner } = Ember;
+const { computed, forEach, getOwner, Logger, Service } = Ember;
 import { CsrfProtection, Logging, EmberEvents } from 'ember-faye/utils/faye-extensions';
 
-export default Ember.Service.extend({
+export default Service.extend({
   client: null,
   config: null,
   subscriptions: {},
   online: false,
-  offline: Ember.computed.not('online'),
+  offline: computed.not('online'),
 
   init() {
-    Ember.Logger.debug('Initializing Ember Faye service...');
+    Logger.debug('Initializing Ember Faye service...');
     this._super(...arguments);
     let config = (getOwner(this).resolveRegistration('config:environment') || {}).faye || {};
     this.set('config', config);
@@ -39,7 +39,7 @@ export default Ember.Service.extend({
     }
 
     if (config.disable) {
-      Ember.forEach(config.disable, (transport) => {
+      forEach(config.disable, (transport) => {
         client.disable(transport);
       });
     }
