@@ -1,5 +1,6 @@
 /*jshint node:true*/
 module.exports = {
+  normalizeEntityName: function() {}, // no-op since we're just adding dependencies
   description: 'Installs bower package for Faye',
 
   // locals: function(options) {
